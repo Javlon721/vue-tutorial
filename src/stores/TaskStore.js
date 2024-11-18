@@ -56,7 +56,23 @@ import { ref, computed } from "vue";
 
 
 export const useTaskStore = defineStore('taskStore', () => {
-  const tasks = ref([]);
+  const tasks = ref([
+    {
+      "id": "3",
+      "title": "title 4",
+      "isFav": true
+    },
+    {
+      "id": "1731484922207",
+      "title": "asdasdasd",
+      "isFav": true
+    },
+    {
+      "id": "1731566423353",
+      "title": "dasasdass",
+      "isFav": false
+    }
+  ]);
   const name = ref('Javlon');
 
   const favs = computed(() => {
@@ -65,49 +81,23 @@ export const useTaskStore = defineStore('taskStore', () => {
   const favsCount = computed(() => {
     return favs.value.length;
   });
-  async function addNewTask(newTask) {
+  function addNewTask(newTask) {
     tasks.value.push(newTask);
-    const responce = await fetch("http://localhost:3000/tasks", {
-      method: "POST",
-      body: JSON.stringify(newTask),
-      headers: {
-        'Content-Type': "application/json"
-      }
-    });
   }
-  async function toggleFav(id) {
+  function toggleFav(id) {
     const currentTasks = tasks.value.find(el => el.id == id);
     currentTasks.isFav = !currentTasks.isFav;
-    const responce = await fetch(`http://localhost:3000/tasks/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        isFav: currentTasks.isFav
-      }),
-      headers: {
-        'Content-Type': "application/json"
-      }
-    });
   }
-  async function deleteTask(id) {
+  function deleteTask(id) {
     tasks.value = tasks.value.filter(el => el.id !== id);
-    const responce = await fetch(`http://localhost:3000/tasks/${id}`, {
-      method: "DELETE",
-    });
   }
-  async function getTasks() {
-    const responce = await fetch("http://localhost:3000/tasks");
-    if (responce.ok) {
-      const newTasks = await responce.json();
-      tasks.value = newTasks;
-    }
-  }
+
   return {
     tasks,
     favsCount, favs, name,
     addNewTask,
     toggleFav,
     deleteTask,
-    getTasks
   };
 });
 

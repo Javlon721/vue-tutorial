@@ -58,7 +58,6 @@ export default {
 		const taskStore = useTaskStore();
 		const toggleBtwTasks = ref(true);
 		const newTaskTitle = ref('');
-		taskStore.getTasks();
 		function addNewTask() {
 			console.log(newTaskTitle);
 			if (newTaskTitle.value.trim()) {
