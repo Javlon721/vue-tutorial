@@ -15,44 +15,19 @@ import { ref, computed } from "vue";
 //     },
 //   },
 //   actions: {
-//     async addNewTask(newTask) {
+//     addNewTask(newTask) {
 //       this.tasks.push(newTask);
-//       const responce = await fetch("http://localhost:3000/tasks", {
-//         method: "POST",
-//         body: JSON.stringify(newTask),
-//         headers: {
-//           'Content-Type': "application/json"
-//         }
-//       });
 //     },
-//     async toggleFav(id) {
+//     toggleFav(id) {
 //       const currentTasks = this.tasks.find(el => el.id == id);
 //       currentTasks.isFav = !currentTasks.isFav;
-//       const responce = await fetch(`http://localhost:3000/tasks/${id}`, {
-//         method: "PATCH",
-//         body: JSON.stringify({
-//           isFav: currentTasks.isFav
-//         }),
-//         headers: {
-//           'Content-Type': "application/json"
-//         }
-//       });
 //     },
-//     async deleteTask(id) {
+//     deleteTask(id) {
 //       this.tasks = this.tasks.filter(el => el.id !== id);
-//       const responce = await fetch(`http://localhost:3000/tasks/${id}`, {
-//         method: "DELETE",
-//       });
 //     },
-//     async getTasks() {
-//       const responce = await fetch("http://localhost:3000/tasks");
-//       if (responce.ok) {
-//         const tasks = await responce.json();
-//         this.tasks = tasks;
-//       }
-//     }
 //   }
-// });
+// }
+// );
 
 
 export const useTaskStore = defineStore('taskStore', () => {
